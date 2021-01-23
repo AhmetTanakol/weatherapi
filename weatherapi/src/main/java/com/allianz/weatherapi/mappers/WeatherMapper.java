@@ -6,6 +6,7 @@ import com.allianz.weatherapi.dto.openmap.WeatherDto;
 import org.mapstruct.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,6 @@ public interface WeatherMapper {
     //Since both temperature and wind speed values are in acceptable range.
     @Named("mapBigDecimalToInt")
     default Integer mapBigDecimalToInt(BigDecimal num) {
-        return num.intValue();
+        return num.setScale(0, RoundingMode.HALF_EVEN).intValue();
     }
 }
